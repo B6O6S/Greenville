@@ -9,7 +9,7 @@ local function createWedgeAtPlayer()
     local playerPosition = character.HumanoidRootPart.Position
     giantWedge.Position = Vector3.new(playerPosition.X, playerPosition.Y - 11, playerPosition.Z)
     giantWedge.Color = Color3.new(0, 0, 0)
-    giantWedge.Transparency = 0.5
+    giantWedge.Transparency = 1
     giantWedge.Anchored = true
     giantWedge.Parent = game.Workspace
 end
