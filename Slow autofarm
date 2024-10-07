@@ -1,0 +1,20 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+character:SetPrimaryPartCFrame(CFrame.new(90000, 0, 90000))
+
+local function createWedgeAtPlayer()
+    local giantWedge = Instance.new("WedgePart")
+    giantWedge.Size = Vector3.new(2048, 14, 2048)
+    local playerPosition = character.HumanoidRootPart.Position
+    giantWedge.Position = Vector3.new(playerPosition.X, playerPosition.Y - 11, playerPosition.Z)
+    giantWedge.Color = Color3.new(0, 0, 0)
+    giantWedge.Transparency = 0.5
+    giantWedge.Anchored = true
+    giantWedge.Parent = game.Workspace
+end
+
+while true do
+    createWedgeAtPlayer()
+    wait(0.1)
+end
