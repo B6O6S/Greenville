@@ -1,0 +1,48 @@
+-- Get the player
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Variable to check if the wedge has been created
+local wedgeCreated = false
+local giantWedge
+
+-- Function to create a new giant wedge
+local function createWedgeAtPosition(position)
+    if not wedgeCreated then
+        giantWedge = Instance.new("WedgePart")
+        giantWedge.Size = Vector3.new(2048, 14, 2048)
+        giantWedge.Position = position
+        giantWedge.Color = Color3.new(0, 0, 0)
+        giantWedge.Transparency = 1
+        giantWedge.Anchored = true
+        giantWedge.Parent = game.Workspace
+        wedgeCreated = true -- Set the flag to true after the wedge is created
+    end
+end
+
+-- Function to teleport player
+local function teleportPlayer(position)
+    character:SetPrimaryPartCFrame(CFrame.new(position))
+end
+
+-- Function to destroy the wedge when the player sits
+local function onPlayerSit()
+    if giantWedge and wedgeCreated then
+        giantWedge:Destroy()
+        wedgeCreated = false -- Reset the flag
+    end
+end
+
+-- Create the platform before teleporting
+local platformPosition = Vector3.new(900000, 0, 900000)
+createWedgeAtPosition(platformPosition)
+
+-- Teleport player to the platform
+teleportPlayer(Vector3.new(900000, 999999999999999, 900000))
+
+-- Connect the player's "Seated" event to the function to destroy the platform
+character.Humanoid.Seated:Connect(function(isSeated)
+    if isSeated then
+        onPlayerSit()
+    end
+end)
