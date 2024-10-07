@@ -1,0 +1,12 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local runService = game:GetService("RunService")
+
+runService.RenderStepped:Connect(function(deltaTime)
+    if character and character:FindFirstChild("HumanoidRootPart") then
+        -- Adjust the speed of rotation (rotation per second)
+        local spinSpeed = 100
+        character.HumanoidRootPart.CFrame = character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(spinSpeed * deltaTime), 0)
+    end
+end)
