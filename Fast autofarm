@@ -38,7 +38,7 @@ local platformPosition = Vector3.new(900000, 0, 900000)
 createWedgeAtPosition(platformPosition)
 
 -- Teleport player to the platform
-teleportPlayer(Vector3.new(900000, 999999999999999, 900000))
+teleportPlayer(Vector3.new(900000, 9999999, 900000))
 
 -- Connect the player's "Seated" event to the function to destroy the platform
 character.Humanoid.Seated:Connect(function(isSeated)
